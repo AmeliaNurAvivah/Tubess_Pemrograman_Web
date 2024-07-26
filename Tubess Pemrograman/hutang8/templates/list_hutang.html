@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Daftar Hutang</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+    <style>
+      /* CSS untuk menata tombol logout */
+      .logout-button {
+        display: block;
+        margin-top: 20px;
+        padding: 10px 20px;
+        background-color: blue;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        border-radius: 5px;
+        position: absolute;
+        right: 10px;
+        bottom: 10px;
+      }
+
+      .container {
+        position: relative;
+        min-height: 100vh;
+      }
+
+      table {
+        margin-bottom: 100px; /* Menambahkan margin bawah untuk ruang bagi tombol logout */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Daftar Hutang</h2>
+      <a href="{{ url_for('add_hutang') }}">Tambah Hutang</a>
+      <a
+        href="{{ url_for('peringkat_hutang') }}"
+        class="peringkat-hutang-button"
+        >Lihat Peringkat Hutang</a
+      >
+
+      <!-- Form Pencarian -->
+      <form action="{{ url_for('list_hutang') }}" method="get">
+        <label for="search">Cari berdasarkan Kode:</label>
+        <input
+          type="text"
+          id="search"
+          name="search"
+          value="{{ request.args.get('search', '') }}"
+        />
+        <button type="submit">Cari</button>
+      </form>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Kode</th>
+            <th>Nama</th>
+            <th>Harga</th>
+            <th>Barang</th>
+            <th>Tanggal</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for hutang in hutang2 %}
+          <tr>
+            <td>{{ hutang.kode }}</td>
+            <td>{{ hutang.nama }}</td>
+            <td>{{ hutang.harga }}</td>
+            <td>{{ hutang.barang }}</td>
+            <td>{{ hutang.tanggal }}</td>
+            <td>
+              <a href="{{ url_for('edit_hutang', kode=hutang.kode) }}">Edit</a>
+              <a
+                href="javascript:void(0);"
+                onclick="deleteHutang('{{ hutang.kode }}');"
+                >Delete</a
+              >
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      <!-- Tombol Logout di bawah tabel -->
+      <a href="{{ url_for('logout') }}" class="logout-button">Logout</a>
+    </div>
+
+    <script>
+      function deleteHutang(kode) {
+        if (confirm("Anda yakin ingin menghapus hutang ini?")) {
+          fetch(`/delete/${kode}`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ kode: kode }),
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              if (data.message === "Hutang berhasil dihapus!") {
+                alert(data.message);
+                window.location.reload();
+              } else {
+                throw new Error(data.message);
+              }
+            })
+            .catch((error) => {
+              console.error("Error:", error);
+              alert(
+                "Terjadi kesalahan saat menghapus hutang: " + error.message
+              );
+            });
+        }
+      }
+    </script>
+  </body>
+</html>

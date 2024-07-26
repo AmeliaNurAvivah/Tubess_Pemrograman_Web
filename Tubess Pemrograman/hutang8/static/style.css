@@ -1,0 +1,93 @@
+/* style.css */
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  text-align: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px; /* Tambahan margin untuk form */
+}
+
+label {
+  margin-top: 10px;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="date"],
+input[type="password"] {
+  padding: 10px;
+  margin-top: 5px;
+}
+
+button {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th,
+td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Tambahan gaya untuk peringkat hutang button */
+.peringkat-hutang-button {
+  display: block;
+  margin-top: 20px; /* Atur margin atas sesuai kebutuhan */
+  padding: 10px 20px; /* Atur padding sesuai kebutuhan */
+  background-color: #3498db; /* Warna latar belakang tombol */
+  color: #fff; /* Warna teks tombol */
+  text-decoration: none; /* Hilangkan dekorasi default tautan */
+  text-align: center; /* Pusatkan teks di dalam tombol */
+  border-radius: 5px; /* Atur sudut lengkung border */
+}
+
+.peringkat-hutang-button:hover {
+  background-color: #2980b9; /* Warna latar belakang saat tombol dihover */
+}

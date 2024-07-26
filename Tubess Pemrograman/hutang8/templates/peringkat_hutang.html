@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Peringkat Hutang</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h2>Peringkat Hutang</h2>
+      <a href="{{ url_for('list_hutang') }}">Kembali ke Daftar Hutang</a>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Kode</th>
+            <th>Nama</th>
+            <th>Harga</th>
+            <th>Barang</th>
+            <th>Tanggal</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for hutang in hutang_sorted %}
+          <tr>
+            <td>{{ hutang.kode }}</td>
+            <td>{{ hutang.nama }}</td>
+            <td>{{ hutang.harga }}</td>
+            <td>{{ hutang.barang }}</td>
+            <td>{{ hutang.tanggal }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>

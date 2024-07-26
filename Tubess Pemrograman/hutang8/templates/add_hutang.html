@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tambah Hutang</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style2.css') }}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h2>Tambah Hutang</h2>
+      <form method="POST" action="{{ url_for('add_hutang') }}">
+        {{ form.hidden_tag() }}
+        <div>
+          <label for="kode">Kode</label>
+          {{ form.kode }} {% for error in form.kode.errors %}
+          <span class="error">{{ error }}</span>
+          {% endfor %}
+        </div>
+        <div>
+          <label for="nama">Nama</label>
+          {{ form.nama }} {% for error in form.nama.errors %}
+          <span class="error">{{ error }}</span>
+          {% endfor %}
+        </div>
+        <div>
+          <label for="harga">Harga</label>
+          {{ form.harga }} {% for error in form.harga.errors %}
+          <span class="error">{{ error }}</span>
+          {% endfor %}
+        </div>
+        <div>
+          <label for="barang">Barang</label>
+          {{ form.barang }} {% for error in form.barang.errors %}
+          <span class="error">{{ error }}</span>
+          {% endfor %}
+        </div>
+        <div>
+          <label for="tanggal">Tanggal</label>
+          {{ form.tanggal }} {% for error in form.tanggal.errors %}
+          <span class="error">{{ error }}</span>
+          {% endfor %}
+        </div>
+        <button type="submit">Tambah</button>
+      </form>
+      {% with messages = get_flashed_messages() %} {% if messages %}
+      <ul class="flashes">
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+      </ul>
+      {% endif %} {% endwith %}
+
+      <!-- Tombol Kembali -->
+      <a href="{{ url_for('list_hutang') }}">Kembali ke Daftar Hutang</a>
+    </div>
+  </body>
+</html>
